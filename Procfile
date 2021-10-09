@@ -1,0 +1,1 @@
+web: gunicorn africana.wsgi --log-file -
