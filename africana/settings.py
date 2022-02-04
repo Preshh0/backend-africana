@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+# import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-zqr(xsvtff+pw4tsz@2gv!45k-dsc@#x@7^c=0*nbgzze_4=nu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["tranquil-taiga-17656.herokuapp.com"]
+ALLOWED_HOSTS = ["tranquil-taiga-17656.herokuapp.com", '127.0.0.1']
 
 
 # Application definition
@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     "rest_framework",
-    "home",
-    "login",
 ]
 
 MIDDLEWARE = [
@@ -132,4 +130,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/' # 'http://myhost:port/media/'
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
