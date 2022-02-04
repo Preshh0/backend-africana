@@ -9,4 +9,4 @@ from .models import User
 class UserCreate(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    # permission_classes = (IsAuthenticatedOrReadOnly)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
