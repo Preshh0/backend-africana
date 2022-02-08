@@ -36,7 +36,7 @@ class ArtworkDetail(APIView):
 
     def put(self, request, pk, format=None):
         artwork = self.get_object(pk)
-        serializer = ArtworkSerializer(snippet, data=request.data)
+        serializer = ArtworkSerializer(artwork, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
