@@ -4,10 +4,13 @@ from rest_framework import status
 from rest_framework.views import APIView
 from .models import Artwork
 from .serializers import ArtworkSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 # Create your views here.
 
 class ArtworkList(APIView):
+
+    permission_classes = [IsAuthenticatedOrReadOnly,]
 
     def get(self, request, format=None):
         artwork = Artwork.objects.all()
@@ -17,10 +20,13 @@ class ArtworkList(APIView):
     def post(self, request, format=None):
         serializer = ArtworkSerializer(data=request.data)
         if serializer.is_valid():
+            serializer.validated_data["creator"] = request.user
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)
 class ArtworkDetail(APIView):
 
     def get_object(self, pk):

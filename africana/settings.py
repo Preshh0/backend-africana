@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     "rest_framework",
-
+    'rest_framework_simplejwt',
+    'drf_yasg',
+    
     'accounts',
     'artwork',
 ]
@@ -56,6 +58,19 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'africana.urls'
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     )
+# }
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 TEMPLATES = [
     {
@@ -134,3 +149,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/' # 'http://myhost:port/media/'
 
 # django_heroku.settings(locals())
+
+AUTH_USER_MODEL = "accounts.User"

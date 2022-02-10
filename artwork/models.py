@@ -1,14 +1,16 @@
-from time import time
+import uuid
+from datetime import datetime
 from django.db import models
-from django.utils import timezone
+from accounts.models import User
 # Create your models here.
 
 class Artwork(models.Model):
-    art = models.ImageField(max_length=None)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    art = models.URLField(blank=True, null=True)
     title = models.CharField(max_length=20)
     description = models.CharField(max_length=300)
-    creator = models.CharField(max_length=20)
-    created_at = models.DateTimeField(default=timezone.now)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, default='')
+    created_at = models.DateTimeField(default=datetime.now)
     
 
     class Meta:
